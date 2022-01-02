@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkAnswer(View view) {
 
+        finishTextView.setVisibility(View.VISIBLE);
         Button selectedButton = (Button) view;
 
         if (selectedButton.getText().equals(Integer.toString(result))) {
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
             timer.cancel();
             setTimer(gameTime);
-            Log.i("gameTimerCorrectAnswer", Integer.toString(gameTime));
         } else {
             finishTextView.setText("Wrong :(");
         }
@@ -103,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setProgress(Integer.parseInt(String.valueOf(millisUntilFinished / 1000)));
                 timerTextView.setText((int) (millisUntilFinished / 1000) + "");
                 gameTime -= 500;
-                Log.i("gameTime", Integer.toString(gameTime));
-
             }
 
             @Override
@@ -158,15 +156,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void playAgain(View view) {
+
         gameTime = 15000;
+        counter = 0;
+        correct = 0;
 
         gridLayout.setEnabled(true);
         finishTextView.setVisibility(View.INVISIBLE);
         playAgainButton.setVisibility(View.INVISIBLE);
 
-
-        counter = 0;
-        correct = 0;
 
         staticsTextView.setText(counter + "/" + correct);
         enableButtons(gridLayout);
